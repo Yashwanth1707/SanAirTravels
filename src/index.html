@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAN Air Travels - Discover India and Beyond</title>
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" href="/dist/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Michroma&family=Poppins:wght@700&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f1e2a, #5f62c4);
+            font-family: "Josefin Sans", sans-serif;
+            color: #1a1a1a;
+        }
+
+        h1,
+        h2,
+        h3,
+        .logo-title {
+            font-family: "Josefin Sans", sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .hero {
+            background-image: url('/images/travel3.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .section-bg {
+
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: rgba(1, 18, 46, 0.956);
+        }
+
+        .card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: translateY(-10px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .testimonial {
+            background: rgba(255, 255, 255, 0.9);
+            margin: 10px;
+        }
+
+        /* Hide scrollbar for card containers */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @keyframes scroll-x {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-scroll-x {
+            animation: scroll-x 60s linear infinite;
+        }
+
+        #about-carousel {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        #about-carousel-track img {
+            min-width: 400px;
+            max-width: 100vw;
+            height: 100%;
+            display: block;
+        }
+
+        /* Overlay background */
+        #loading-spinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            /* dark transparent */
+            backdrop-filter: blur(5px);
+            /* blur background */
+            display: none;
+            /* hidden by default */
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        /* Spinner circle */
+        #loading-spinner .spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #007bff;
+            /* blue */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        /* Spinner animation */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #loading-spinner p {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: rgba(1, 18, 46, 0.956);
+        }
+
+        .contentdiv {
+            background: rgba(14, 4, 48, 0.085);
+            backdrop-filter: blur(2px);
+        }
+    </style>
+</head>
+
+<body class="font-sans">
+    <!-- Navigation -->
+    <nav class="navbar fixed top-0 w-full z-50">
+        <div class="mx-10 px-6 py-4 flex justify-between items-center">
+            <!-- Logo + Title -->
+            <h1 class="flex items-center space-x-3">
+                <a href="#about" class="transition bg-white p-1 rounded-full hover:shadow-lg">
+                    <img src="/images/logo.png" alt="SAN Logo" class="w-16 h-16 sm:w-20 sm:h-20">
+                </a>
+                <span class="text-2xl sm:text-3xl md:text-4xl font-bold text-white">SAN Air Travels</span>
+            </h1>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-8 text-lg font-medium">
+                <li><a href="#about" class="text-white hover:text-blue-600 transition">Home</a></li>
+                <li><a href="#contact" class="text-white hover:text-blue-600 transition">Contact</a></li>
+                <li><a href="#south-india" class="text-white hover:text-blue-600 transition">India Tours</a></li>
+                <li><a href="#international" class="text-white hover:text-blue-600 transition">International
+                        Trips</a></li>
+                <li><a href="#testimonials" class="text-white hover:text-blue-600 transition">Testimonials</a></li>
+                <li><a href="#inquiry" class="text-white hover:text-blue-600 transition">Inquiry</a></li>
+            </ul>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white text-3xl" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <ul class="md:hidden hidden flex-col space-y-3 px-6 py-4 bg-white shadow-md text-lg font-medium"
+            id="mobile-menu">
+            <li><a href="#about" class="block text-gray-700 hover:text-blue-600">Home</a></li>
+            <li><a href="#contact" class="block text-gray-700 hover:text-blue-600">Contact</a></li>
+            <li><a href="#south-india" class="block text-gray-700 hover:text-blue-600">India Tours</a></li>
+            <li><a href="#international" class="block text-gray-700 hover:text-blue-600">International Trips</a></li>
+            <li><a href="#testimonials" class="block text-gray-700 hover:text-blue-600">Testimonials</a></li>
+            <li><a href="#inquiry" class="block text-gray-700 hover:text-blue-600">Inquiry</a></li>
+        </ul>
+    </nav>
+
+    <div class=" bg-blue-700 h-24 md:h-28"></div>
+
+    <!-- About Section with scrolling images and overlay -->
+    <section id="about"
+        class="relative py-12 sm:py-16 md:py-20 min-h-[420px] sm:min-h-[500px] md:min-h-[600px] overflow-hidden flex items-center justify-center">
+        <!-- Background Carousel -->
+        <div class="absolute inset-0">
+            <div id="about-carousel" class="w-full h-full overflow-hidden">
+                <div id="about-carousel-track" class="flex w-max h-full animate-scroll-x opacity-60">
+                    <!-- Images -->
+                    <img src="/images/travel1.jpeg" alt="Travel 1"
+                        class="h-full w-auto object-cover" />
+                    <img src="/images/travel2.jpeg" alt="Travel 2"
+                        class="h-full w-auto object-cover" />
+                    <img src="/images/travel3.jpeg" alt="Singapore Airlines A380"
+                        class="h-full w-auto object-cover" />
+                    <img src="/images/travel4.png" alt="Singapore Airlines 777"
+                        class="h-full w-auto object-cover" />
+                    <img src="/images/travel5.jpeg" alt="Travel 3"
+                        class="h-full w-auto object-cover" />
+                    <img src="/images/travel6.jpeg" alt="Travel 4"
+                        class="h-full w-auto object-cover" />
+                    <!-- Repeat for seamless scroll -->
+                    <img src="/images/travel1.jpeg" alt="Travel 1"
+                        class="h-full w-auto object-cover" />
+                    <img src="/images/travel2.jpeg" alt="Travel 2"
+                        class="h-full w-auto object-cover" />
+                    <img src="/images/travel3.jpeg" alt="Singapore Airlines A380"
+                        class="h-full w-auto object-cover" />
+                    <img src="/images/travel4.png" alt="Singapore Airlines 777"
+                        class="h-full w-auto object-cover" />
+                    <img src="/images/travel5.jpeg" alt="Travel 3"
+                        class="h-full w-auto object-cover" />
+                    <img src="/images/travel6.jpeg" alt="Travel 4"
+                        class="h-full w-auto object-cover" />
+                </div>
+            </div>
+            <!-- Optional darker overlay -->
+            <div class="absolute inset-0 bg-black/30"></div>
+        </div>
+
+        <!-- Fullscreen Content Div -->
+        <div class="relative w-full h-full flex items-center justify-center">
+            <div
+                class="contentdiv backdrop-blur-md bg-black/40 rounded-none w-full h-full flex flex-col items-center justify-center text-center text-white p-8 sm:p-12 shadow-2xl">
+                <h2
+                    class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-8 drop-shadow-[0_4px_6px_rgba(0,0,0,0.9)]">
+                    SAN Air Travels
+                </h2>
+                <p class="text-xl sm:text-2xl md:text-3xl leading-relaxed max-w-4xl">
+                    <strong class="font-bold">SAN Air Travels</strong> is a trusted travel company based in India,
+                    dedicated to providing memorable journeys across India and the world. With years of experience in
+                    the travel industry, we specialize in curated tour packages, flight bookings, and personalized
+                    travel
+                    planning for families, groups, and solo adventurers.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- What We Do Section (add after About section, before India Tours section) -->
+    <section id="what-we-do" class="py-16 section-bg">
+        <div class=" mx-auto px-4 sm:px-6 md:px-8">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 text-white">What We Do</h2>
+
+            <p class="text-lg text-gray-700 text-center mb-12 max-w-3xl mx-auto text-white">
+                Our team of experienced travel consultants is here to assist you at every step, ensuring a hassle-free
+                experience from start to finish. Let us help you create unforgettable memories with our tailored
+                travel solutions.
+            </p><br> <!-- Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+                <!-- Card 1 -->
+                <a href="#inquiry" class="group">
+                    <div
+                        class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center text-center hover:shadow-xl transition group-hover:scale-105 h-80 min-h-[320px] w-full sm:w-72">
+                        <i class="fas fa-plane-departure text-blue-600 text-4xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Flight Booking</h3>
+                        <p class="text-gray-600 overflow-auto">SAN makes flight booking quick and effortless, offering
+                            the best deals on both domestic and international routes.</p>
+                    </div>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="#inquiry" class="group">
+                    <div
+                        class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center text-center hover:shadow-xl transition group-hover:scale-105 h-80 min-h-[320px] w-full sm:w-72">
+                        <i class="fas fa-bus text-green-600 text-4xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Bus Booking</h3>
+                        <p class="text-gray-600 overflow-auto">SAN books tickets for you easily for a safe, affordable,
+                            and comfortable journey.</p>
+                    </div>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="#inquiry" class="group">
+                    <div
+                        class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center text-center hover:shadow-xl transition group-hover:scale-105 h-80 min-h-[320px] w-full sm:w-72">
+                        <i class="fas fa-route text-purple-600 text-4xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Tours Booking</h3>
+                        <p class="text-gray-600 overflow-auto">Discover exciting tour packages across India and
+                            international destinations. Choose from a wide range of tours that suit your interests and
+                            budget.</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- India Tours Section -->
+    <section id="south-india" class="py-20 section-bg">
+        <div class=" mx-auto px-2 sm:px-4 md:px-6">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-16 text-white">Explore India
+            </h2>
+            <div class="relative">
+                <button id="south-india-left"
+                    class="hidden md:flex absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:bg-blue-100">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div id="south-india-cards"
+                    class="flex flex-nowrap overflow-x-auto space-x-4 sm:space-x-6 md:space-x-8 scrollbar-hide snap-x snap-mandatory pb-2">
+                    <!-- Card 1 -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/kerala.png" alt="Serene backwaters of Kerala"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">Kerala Backwaters</h3>
+                            <p>Drift through the calm backwaters of Kerala on a traditional houseboat and enjoy the lush
+                                green landscapes around you. This package offers a perfect blend of relaxation and
+                                nature,
+                                with scenic views, authentic Kerala cuisine, and peaceful surroundings.
+                                Ideal for families, couples, or anyone seeking a serene getaway.
+                            </p>
+                        </div>
+                        <button
+                            class="more-info-btn mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                    <!-- Card 2 -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/mysore.png" alt="Mysore Palace"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">Mysore & Bangalore</h3>
+                            <p>Explore the cultural heritage of Mysore with its palaces, temples, and rich traditions,
+                                then
+                                experience the modern lifestyle and bustling city life of Bangalore.
+                                This package blends history with urban vibes, making it a perfect getaway for all kinds
+                                of
+                                travelers.
+                            </p>
+                        </div>
+                        <button
+                            class=" more-info-btn mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                    <!-- Card 3 -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/tamil.png" alt="Tamil Nadu Temples"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">Tamil Nadu Heritage</h3>
+                            <p>Tamil Nadu is a land of ancient temples, classical dance, and vibrant traditions. From
+                                the
+                                architectural marvels of Madurai and Thanjavur to the serene beaches of Rameswaram and
+                                Kanyakumari, every corner tells a story.
+                                Add to it the cool hill stations like Ooty and Kodaikanal, and you have a perfect mix of
+                                heritage, spirituality, and nature.
+                            </p>
+                        </div>
+                        <button
+                            class="more-info-btn mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                    <!-- Card 4 -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/goa.png" alt="Goa Beach"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">Goa</h3>
+                            <p>Unwind on Goa’s golden beaches, enjoy thrilling water sports, and experience the
+                                lively nightlife that makes Goa unforgettable.
+                                From beach shacks and seafood delights to Portuguese heritage and serene sunsets, this
+                                package is perfect for both relaxation and adventure seekers.
+                            </p>
+                        </div>
+                        <button
+                            class="more-info-btn mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                    <!-- Card 5 -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/karnataka.png" alt="Bandipur National Park"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">Karnataka Wildlife</h3>
+                            <p>Explore Karnataka’s famous wildlife sanctuaries and national parks, home to
+                                tigers, elephants, and diverse bird species. From the dense forests of Bandipur and
+                                Nagarhole to the scenic beauty of Kabini and Dandeli, this package is perfect for nature
+                                lovers and adventure seekers.
+                                Experience safaris, eco-stays, and the raw charm of the wilderness.
+                            </p>
+                        </div>
+                        <button
+                            class="more-info-btn mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                    <!-- Card 6 (NEW) -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/tirupathi.jpg" alt="Andhra Pradesh Temples"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">Andhra Pradesh </h3>
+                            <p>Andhra Pradesh is a land of diverse experiences — from the sacred Tirupati
+                                temple and ancient Buddhist sites to the stunning coastline of Visakhapatnam and Araku
+                                Valley’s scenic hills.
+                                With vibrant culture, delicious cuisine, and historic charm, this package offers a
+                                perfect
+                                mix of spirituality, history, and natural beauty.
+                            </p>
+                        </div>
+                        <button
+                            class="more-info-btn mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                    <!-- Card 7 (NEW) -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/hyderabad.jpg" alt="Hyderabad City"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">Hyderabad City</h3>
+                            <p>Hyderabad blends history and modernity with iconic landmarks like Charminar,
+                                Golconda Fort, and Chowmahalla Palace. Explore bustling bazaars, savor the world-famous
+                                Hyderabadi biryani, and enjoy the city’s IT hub and modern lifestyle.
+                                A perfect mix of culture, cuisine, and city vibes.
+                            </p>
+                        </div>
+                        <button
+                            class="more-info-btn mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                </div>
+                <button id="south-india-right"
+                    class="hidden md:flex absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:bg-blue-100">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- International Trips Section -->
+    <section id="international" class="py-20">
+        <div class="container mx-auto px-2 sm:px-4 md:px-6">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-16 text-white">Global
+                Adventures</h2>
+            <div class="relative">
+                <button id="international-left"
+                    class="hidden md:flex absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:bg-blue-100">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div id="international-cards"
+                    class="flex flex-nowrap overflow-x-auto space-x-4 sm:space-x-6 md:space-x-8 scrollbar-hide snap-x snap-mandatory pb-2">
+                    <!-- Card 1 -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/china.png" alt="Great Wall of China"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">China Highlights</h3>
+
+                            <p>Discover China’s iconic attractions — from the Great Wall and Forbidden City in Beijing
+                                to the Terracotta Warriors in Xi’an and the skyline of Shanghai. Cruise along the Li
+                                River, explore ancient temples, and experience vibrant local traditions.
+                                A journey that blends rich heritage with breathtaking landscapes and modern city life.
+                            </p>
+                        </div>
+                        <button
+                            class=" more-info-btn mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                    <!-- Card 2 -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/japan.png" alt="Tokyo Skyline"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">Japan Discovery</h3>
+                            <p>From the serene temples of Kyoto and the iconic Mount Fuji to the bustling streets of
+                                Tokyo, Japan offers a perfect mix of heritage and innovation. Discover cherry blossoms,
+                                bullet trains, sushi delights, and vibrant culture.
+                                A journey that’s peaceful, modern, and unforgettable.
+                            </p>
+                        </div>
+                        <button
+                            class=" more-info-btn mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                    <!-- Card 3 -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/usa.png" alt="Statue of Liberty"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">USA East Coast</h3>
+
+                            <p>From the bustling streets of New York City and the historic monuments of Washington D.C.
+                                to the cultural charm of Boston and the scenic beauty of Niagara Falls, the East Coast
+                                offers it all.
+                                Experience world-famous attractions, diverse cuisines, and vibrant city life in one
+                                unforgettable journey.
+                            </p>
+                        </div>
+                        <button
+                            class=" more-info-btn mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                    <!-- Card 4 -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/thailand.png" alt="Phuket Beaches"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">Thailand Islands</h3>
+                            <p>Thailand offers the perfect mix of relaxation and adventure — from the golden temples of
+                                Bangkok and the bustling markets of Pattaya to the serene beaches of Phuket and Krabi.
+                                Enjoy exotic cuisine, water sports, and rich cultural experiences that make Thailand one
+                                of Asia’s top holiday destinations.
+                            </p>
+                        </div>
+                        <button
+                            class=" more-info-btn mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                    <!-- Card 5 -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/europe.png" alt="Eiffel Tower Paris"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">Europe Romance</h3>
+                            <p>Europe is a dream destination filled with history, art, and breathtaking landscapes. From
+                                the Eiffel Tower in Paris and gondola rides in Venice to the Swiss Alps and the cultural
+                                treasures of London, every city has its own story.
+                                A perfect blend of romance, adventure, and unforgettable memories.</p>
+                        </div>
+                        <button
+                            class=" more-info-btn mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                    <!-- Card 6 (NEW) -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/australia.jpg" alt="Australia Sydney"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">Australia Wonders</h3>
+                            <p>Australia offers a perfect mix of adventure, wildlife, and modern attractions. Explore
+                                the iconic Sydney Opera House, the Great Barrier Reef, and the scenic landscapes of the
+                                Outback.
+                                From golden beaches and bustling cities to unique wildlife encounters, every moment in
+                                Australia is unforgettable.
+                            </p>
+                        </div>
+                        <button
+                            class="more-info-btn  mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                    <!-- Card 7 (NEW) -->
+                    <div
+                        class="card bg-white rounded-lg p-4 sm:p-6 text-center min-w-[85vw] sm:min-w-[320px] md:min-w-[260px] max-w-xs mx-auto snap-start flex flex-col h-96">
+                        <img src="/images/dubai.jpg" alt="Dubai Skyline"
+                            class="w-full h-48 object-cover rounded mb-4" />
+                        <div class="flex-grow pb-4">
+                            <h3 class="text-xl font-semibold mb-2">Dubai Luxury</h3>
+                            <p>Dubai is the ultimate luxury destination, blending modern marvels with Arabian elegance.
+                                Stay in world-class hotels, shop at designer malls, and enjoy desert safaris, private
+                                yachts, and fine dining.
+                                From the Burj Khalifa’s breathtaking views to the charm of Dubai Marina, every moment is
+                                crafted for a lavish experience.</p>
+                        </div>
+                        <button
+                            class=" more-info-btn  mt-4 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 hover:scale-105 transition">
+                            More Info
+                        </button>
+                    </div>
+                </div>
+                <button id="international-right"
+                    class="hidden md:flex absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:bg-blue-100">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-8 sm:mb-12 md:mb-16 text-white">
+                What Our Travelers Say</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+                    <p class="mb-4 text-gray-700">"Kerala was mesmerizing! The backwaters and hills were beyond words.
+                        Highly recommend SAN Tours for a memorable trip."</p>
+                    <p class="font-semibold text-gray-900">- Praveen.</p>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+                    <p class="mb-4 text-gray-700">"Our Rajasthan tour was impeccable. The heritage hotels and camel
+                        safari made it unforgettable. Great service!"</p>
+                    <p class="font-semibold text-gray-900">- Santosh S.</p>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+                    <p class="mb-4 text-gray-700">"Amazing experience in Goa! Beaches, food, and hospitality were
+                        top-notch. Will book again with SAN Tours."</p>
+                    <p class="font-semibold text-gray-900">- Ananya Pandey M.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Inquiry Form Section -->
+    <section id="inquiry" class="py-20 section-bg">
+        <div class="container mx-auto px-2 sm:px-4 md:px-6">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-16 text-white">Plan Your Dream
+                Trip</h2>
+            <form class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-4 sm:p-8 md:p-10" id="inquiry-form">
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 mb-2">Full Name</label>
+                        <input type="text" id="name" class="w-full px-4 py-3 border rounded-lg" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-3 border rounded-lg" required>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 mb-2">Phone Number</label>
+                        <div class="flex">
+                            <!-- Country Code Select -->
+                            <select id="countryCode"
+                                class="w-28 sm:w-32 px-2 py-3 border rounded-l-lg bg-gray-100 text-sm sm:text-base">
+                                <option value="+91">🇮🇳 +91</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+61">🇦🇺 +61</option>
+                                <option value="+81">🇯🇵 +81</option>
+                                <option value="+49">🇩🇪 +49</option>
+                                <option value="+33">🇫🇷 +33</option>
+                                <option value="+55">🇧🇷 +55</option>
+                                <option value="+27">🇿🇦 +27</option>
+                                <option value="+86">🇨🇳 +86</option>
+                                <option value="+971">🇦🇪 +971</option>
+                                <option value="+966">🇸🇦 +966</option>
+                                <option value="+39">🇮🇹 +39 </option>
+                                <option value="+7">🇷🇺 +7 </option>
+                                <option value="+34">🇪🇸 +34 </option>
+                                <option value="+82">🇰🇷 +82 </option>
+                                <option value="+60">🇲🇾 +60 </option>
+                                <option value="+65">🇸🇬 +65 </option>
+                                <option value="+92">🇵🇰 +92 </option>
+                                <option value="+880">🇧🇩 +880 </option>
+                            </select>
+
+                            <!-- Phone Input -->
+                            <input type="tel" id="phone"
+                                class="w-full px-4 py-3 border-t border-b border-r rounded-r-lg"
+                                placeholder="1234567890" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Preferred Destination</label>
+                        <select id="destination" class="w-full px-4 py-3 border rounded-lg">
+                            <option>Kerala</option>
+                            <option>Mysore & Bangalore</option>
+                            <option>Tamil Nadu</option>
+                            <option>Goa</option>
+                            <option>Karnataka Wildlife</option>
+                            <option>Andhra Pradesh</option>
+                            <option>Hyderabad</option>
+                            <option>International - China</option>
+                            <option>International - Japan</option>
+                            <option>International - USA</option>
+                            <option>International - Thailand</option>
+                            <option>International - Europe</option>
+                            <option>International - Australia</option>
+                            <option>International - Dubai</option>
+                            <option>other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 mb-2">Travel Dates</label>
+                        <input type="date" id="dates" class="w-full px-4 py-3 border rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Number of Travelers</label>
+                        <input type="number" min="1" id="travelers" class="w-full px-4 py-3 border rounded-lg">
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 mb-2">Accommodation Type</label>
+                        <select id="accommodation" class="w-full px-4 py-3 border rounded-lg">
+                            <option>Luxury</option>
+                            <option>Standard</option>
+                            <option>Budget</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Budget Range</label>
+                        <input type="text" id="budget" placeholder="₹1000 - ₹100000"
+                            class="w-full px-4 py-3 border rounded-lg">
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 mb-2">Preferred Activities</label>
+                        <select id="activities" class="w-full px-4 py-3 border rounded-lg">
+                            <option>Beach & Relaxation</option>
+                            <option>Adventure & Hiking</option>
+                            <option>Cultural & Heritage</option>
+                            <option>Wildlife & Safari</option>
+                            <option>Mixed</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Dietary Restrictions</label>
+                        <input type="text" id="dietary" placeholder="Vegetarian, Gluten-free, etc."
+                            class="w-full px-4 py-3 border rounded-lg">
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2">Additional Comments</label>
+                    <textarea id="comments" class="w-full px-4 py-3 border rounded-lg" rows="4"></textarea>
+                </div>
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold shadow-lg transform hover:scale-105">Submit
+                    Inquiry</button>
+
+                <!-- Spinner Overlay -->
+                <div id="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Sending...</p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="py-20 section-bg">
+        <div class="container mx-auto px-2 sm:px-4 md:px-6 max-w-6xl">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 text-white">
+                Our Locations
+            </h2>
+            <p class="text-lg text-white mb-10 text-center">
+                Visit our office or find us on the map below.
+            </p>
+
+            <!-- Grid for side by side -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- First Location -->
+                <div class="rounded-lg overflow-hidden shadow-lg bg-gray-900">
+                    <p class="text-lg text-white mb-4 text-center font-semibold">
+                        Chennai
+                    </p>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.5042351994603!2d80.12217052589455!3d13.00352979314542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52602e3d340001%3A0xa387f4c24556572d!2sAsv%20Manpower%20Consultancy%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1758228251439!5m2!1sen!2sin"
+                        class="w-full h-72 md:h-96" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="mt-4 p-4 text-center text-white">
+                        <strong>Address:</strong> No 4/70, Near St Joseph Arts and Science College, Keelma Nagar, Kovur,
+                        CHENNAI - 600122
+                    </div>
+                </div>
+
+                <!-- Second Location -->
+                <div class="rounded-lg overflow-hidden shadow-lg bg-gray-900">
+                    <p class="text-lg text-white mb-4 text-center font-semibold">
+                        Kalayarkoil
+                    </p>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3931.0006811940743!2d78.6433382747915!3d9.850308690247605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00f87b35fe002f%3A0x840016b184bcd4c5!2s1%2C%20VIP%20Nagar%2C%20Thondi%20nagar%2C%20Kalayarkoil%2C%20Tamil%20Nadu%20630551!5e0!3m2!1sen!2sin!4v1758262023450!5m2!1sen!2sin"
+                        class="w-full h-72 md:h-96" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="mt-4 p-4 text-center text-white">
+                        <strong>Address:</strong> NO.1, VIP Nagar, Kalayarkoil, SIVAGANGA, Tamil Nadu 630551, India
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-800 text-white text-center py-10">
+        <div class="container mx-auto px-4">
+            <p class="text-lg text-white">
+                © 2025 SAN Air travels. All rights reserved. | Email: sanairtravelskk@gmail.com
+            </p>
+            <div class="mt-6">
+                <a href="https://www.instagram.com/sanairtravelskk/?igsh=MTBiOGZ1ODRyejloOQ%3D%3D#" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fab fa-facebook text-2xl mx-4 hover:text-blue-400 transition"></i>
+                </a>
+
+                <a href="https://wa.me/+916369543489?text=Hi%2C%20I%20would%20like%20to%20inquire%20about%20travel%20packages."
+                    target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp text-2xl mx-4 hover:text-green-400 transition"></i>
+                </a>
+
+                <a href="https://www.instagram.com/sanairtravelskk/?igsh=MTBiOGZ1ODRyejloOQ%3D%3D#" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fab fa-instagram text-2xl mx-4 hover:text-pink-400 transition"></i>
+                </a>
+            </div>
+            <div class="mt-6 text-lg text-white">
+                <strong>Phone:</strong> +91 7373202597 , +916369543489
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', function () {
+                const menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a menu link is clicked
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', function () {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                });
+            });
+        });
+
+
+        // Form submission with validation
+        document.getElementById('inquiry-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const spinner = document.getElementById('loading-spinner');
+            spinner.style.display = "flex"; // Show spinner
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const destination = document.getElementById('destination').value.trim();
+            const dates = document.getElementById('dates').value.trim();
+            const travelers = document.getElementById('travelers').value.trim();
+            const accommodation = document.getElementById('accommodation').value.trim();
+            const budget = document.getElementById('budget').value.trim();
+            const message = document.getElementById('comments').value.trim();
+
+            // Build message text
+            const messageText = `New Inquiry from Website:\n` +
+                `Name: ${name}\n` +
+                `Email: ${email}\n` +
+                `Phone: ${phone}\n` +
+                `Destination: ${destination}\n` +
+                `Dates: ${dates}\n` +
+                `Travelers: ${travelers}\n` +
+                `Accommodation: ${accommodation}\n` +
+                `Budget: ${budget}\n` +
+                `Comments: ${message}`;
+
+            const formData = { message: messageText };
+
+            try {
+                const response = await fetch('https://SANairtravels.com/send-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert('✅ Your inquiry has been sent successfully via Email!');
+                    this.reset();
+                } else {
+                    alert('❌ Failed to send inquiry: ' + (result.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('⚠️ Something went wrong. Please try again later.');
+            } finally {
+                spinner.style.display = "none"; // Hide spinner
+            }
+        });
+
+
+
+
+
+        //Helper to scroll by one card width
+        function scrollCards(containerId, direction) {
+            const container = document.getElementById(containerId);
+            const card = container.querySelector('.card');
+            if (card) {
+                const scrollAmount = card.offsetWidth + 16; // 16px for gap
+                container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        // Horizontal scroll for South India section
+        document.getElementById('south-india-left').onclick = () => {
+            scrollCards('south-india-cards', -1);
+        };
+        document.getElementById('south-india-right').onclick = () => {
+            scrollCards('south-india-cards', 1);
+        };
+
+        // Horizontal scroll for International section
+        document.getElementById('international-left').onclick = () => {
+            scrollCards('international-cards', -1);
+        };
+        document.getElementById('international-right').onclick = () => {
+            scrollCards('international-cards', 1);
+        };
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".more-info-btn").forEach(btn => {
+                btn.addEventListener("click", function () {
+                    const card = this.closest(".card"); // get parent card
+                    const title = card.querySelector("h3").innerText;
+
+                    console.log("Package Details:");
+                    console.log("Title:", title);
+
+
+                    // Example: Pass into your existing inquiry form
+                    moreInfo({ title });
+                });
+            });
+        });
+
+        function moreInfo({ title }) {
+            // Smooth scroll to inquiry form
+            document.getElementById("inquiry").scrollIntoView({ behavior: "smooth" });
+
+            // Fill hidden input with all details
+            const inquiryDetails = document.getElementById("inquiry-details");
+            if (inquiryDetails) {
+                inquiryDetails.value = `${title} | ${price} | ${description}`;
+            }
+            // Update Preferred Destination dropdown if matching option exists
+            const destinationSelect = document.getElementById("destination");
+            if (destinationSelect) {
+                for (let option of destinationSelect.options) {
+                    if ((option.text.toLowerCase().includes(title.toLowerCase().split(' ')[0]))) {
+                        option.selected = true;
+                        break;
+                    }
+                }
+            }
+
+
+        }
+
+    </script>
+
+    <!-- Floating WhatsApp Icon -->
+    <a href="https://wa.me/+916369543489?text=Hi%2C%20I%20would%20like%20to%20inquire%20about%20travel%20packages."
+        target="_blank" rel="noopener noreferrer"
+        class="fixed bottom-6 right-6 bg-green-500 text-white rounded-full p-4 shadow-lg hover:bg-green-600 transition z-50">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+</body>
+
+</html>

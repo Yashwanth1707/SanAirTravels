@@ -1,0 +1,32 @@
+{
+  "name": "bsa-tours-and-air-travels",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "BSA Tours and Air Travels website",
+  "main": "index.html",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "start": "node src/server.js"
+  },
+  "keywords": [
+    "travel",
+    "tours",
+    "airlines",
+    "tailwindcss"
+  ],
+  "author": "Yashwanth Gunnam",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "node": "^20.19.5",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^7.0.6"
+  }
+}
