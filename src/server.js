@@ -22,6 +22,13 @@ app.use(cors({
   credentials: true
 }));
 
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "https://sanairtravels.onrender.com");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.sendStatus(200);
+});
+
 // ✅ Serve static files from public/
 app.use(express.static(path.join(process.cwd(), "public")));
 
