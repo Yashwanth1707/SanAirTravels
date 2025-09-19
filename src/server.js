@@ -14,9 +14,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Middleware
-app.use(cors());
 app.use(bodyParser.json());
 
+app.use(cors({
+  origin: "https://sanairtravels.onrender.com", // allow your frontend
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true
+}));
 // ✅ Serve static files from public/
 app.use(express.static(path.join(process.cwd(), "public")));
 
