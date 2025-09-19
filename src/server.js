@@ -21,6 +21,7 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
 }));
+
 // ✅ Serve static files from public/
 app.use(express.static(path.join(process.cwd(), "public")));
 
